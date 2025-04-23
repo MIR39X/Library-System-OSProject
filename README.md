@@ -38,7 +38,7 @@ Library-System-OS-Project/
 ```
 
 # 📚 Course Info
-Course: Operating Systems
-Instructor: Atiya Jokhio
-Semester: Spring'25
-Institution: Fast NUCES Khi
+** Course: Operating Systems
+** Instructor: Atiya Jokhio
+** Semester: Spring'25
+** Institution: Fast NUCES Khi
