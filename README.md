@@ -37,8 +37,11 @@ Library-System-OS-Project/
 └── README.md
 ```
 
-# 📚 Course Info
-** Course: Operating Systems
-** Instructor: Atiya Jokhio
-** Semester: Spring'25
-** Institution: Fast NUCES Khi
+## 📚 Course Info
+**Course:** Operating Systems
+
+**Instructor:** Atiya Jokhio
+
+**Semester:** Spring'25
+
+**Institution:** Fast NUCES Khi
