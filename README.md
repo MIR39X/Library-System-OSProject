@@ -19,3 +19,26 @@ A multi-threaded simulation of the classic **Reader-Writer problem**, implemente
 ```bash
 gcc -o library main.c -lpthread
 ./library
+
+🧠 Concept
+This project demonstrates how to solve the Reader-Writer Problem, where:
+
+Multiple readers can read at the same time.
+
+Writers must have exclusive access.
+
+Synchronization is handled using pthread_mutex_t and sem_t.
+
+Library-System-OS-Project/
+├── main.c              # Entry point with thread creation
+├── book_operations.c   # Functions to add/view/remove books
+├── book_operations.h   # Declarations
+├── thread_manager.c    # Reader/writer thread logic
+├── thread_manager.h
+└── README.md
+
+📚 Course Info
+Course: Operating Systems
+Instructor: Atiya Jokhio
+Semester: Spring'25
+Institution: Fast NUCES Khi
