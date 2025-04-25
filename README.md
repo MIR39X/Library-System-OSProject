@@ -17,8 +17,8 @@ A multi-threaded simulation of the classic **Reader-Writer problem**, implemente
 ## 🚀 How to Run
 
 ```bash
-gcc -o library main.c -lpthread
-./library
+make
+./library_system
 ```
 
 # 🧠 Concept
