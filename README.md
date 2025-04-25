@@ -34,6 +34,7 @@ Library-System-OS-Project/
 ├── book_operations.h   # Declarations
 ├── thread_manager.c    # Reader/writer thread logic
 ├── thread_manager.h
+├── makefile
 └── README.md
 ```
 
