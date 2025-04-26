@@ -1,40 +1,41 @@
-#include <semaphore.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <stdio.h>
-#include "book_operations.h"
+#include "thread_manager.h"
 
-// Mutex and semaphore for controlling access to the library
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; 
-sem_t rw_mutex;
-
-pthread_t readers[3];
+// Define the global variables (mutex, rw_mutex, readers, writers)
+pthread_t readers[5];
 pthread_t writers[2];
+sem_t rw_mutex;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;  // Mutex for controlling access to shared resource
 
-// Reader thread logic (students accessing the books)
-void* reader_thread(void* arg) {
-    sem_wait(&rw_mutex);  // Wait if writer is active
-    pthread_mutex_lock(&mutex);  // Start reading
+// Function to handle reader threads
+void *reader_thread(void *arg) {
+    // Reader thread logic (borrow/view books)
+    sem_wait(&rw_mutex);  // Wait for a writer to finish
+    pthread_mutex_lock(&mutex);
 
-    // Reader logic to view book catalog
-    viewBookCatalog();
+    printf("Reader thread: Viewing book catalog...\n");
+    viewBookCatalog();  // This will print the catalog
 
-    pthread_mutex_unlock(&mutex);  // Release lock after reading
-    sem_post(&rw_mutex);  // Allow other readers or a writer
+    pthread_mutex_unlock(&mutex);
+    sem_post(&rw_mutex);  // Allow other readers or writers
 
     return NULL;
 }
 
-// Writer thread logic (librarians updating the books)
-void* writer_thread(void* arg) {
-    sem_wait(&rw_mutex);  // Wait if any reader is active
-    pthread_mutex_lock(&mutex);  // Start writing
+// Function to handle writer threads
+void *writer_thread(void *arg) {
+    // Writer thread logic (add/remove books)
+    sem_wait(&rw_mutex);  // Block other readers and writers
+    pthread_mutex_lock(&mutex);
 
-    // Writer logic to add/remove books or members
-    addBook();
-    addMember();
+    // Simulate adding/removing a book
+    printf("Writer thread: Adding/removing book...\n");
+    addBook();  // This could be a function like addBook, removeBook, etc.
 
-    pthread_mutex_unlock(&mutex);  // Release lock after writing
-    sem_post(&rw_mutex);  // Allow other threads to proceed
+    pthread_mutex_unlock(&mutex);
+    sem_post(&rw_mutex);  // Allow other readers or writers
 
     return NULL;
 }
