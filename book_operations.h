@@ -1,7 +1,6 @@
 #ifndef BOOK_OPERATIONS_H
 #define BOOK_OPERATIONS_H
-
-// Function declarations for book operations
+//--Book Operations-//
 void addBook();
 void removeBook();
 void borrowBook();
@@ -9,7 +8,7 @@ void logEvent(const char *event);
 int checkIfBookExists(char *bookTitle);
 void viewBookCatalog();
 
-// Function declarations for member operations
+//--Member Operations-//
 void addMember();
 void removeMember();
 void viewMemberList();
