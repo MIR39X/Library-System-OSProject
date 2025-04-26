@@ -21,32 +21,25 @@ int choice;
 int getTerminalWidth() {
     const char* cols = getenv("COLUMNS");
     if (cols != NULL) {
-        return atoi(cols);  // Convert to integer if available
+        return atoi(cols);  
     }
-    return DEFAULT_WIDTH;  // Use default width if terminal width is not found
+    return DEFAULT_WIDTH;  
 }
 void printCenteredBold(const char* str) {
     int len = strlen(str);
     int width = getTerminalWidth();
-    int spaces = (width - len) / 2;  // Calculate spaces to center the text
+    int spaces = (width - len) / 2; 
 
-    // ANSI escape codes for bold text
-    printf("\033[1m");  // Start bold
+    printf("\033[1m");
 
-    // Print leading spaces for centering
     for (int i = 0; i < spaces; i++) {
         printf(" ");
     }
-
-    // Print the actual string
     printf("%s\n", str);
-
-    
 }
 
-// Function to display the menu
-void displayMenu() {
-    // Menu options in normal text (no bold)
+void displayMenu()
+{   
     printf("\n");
     printf(RED"1. Add Book\n"RESET);
     printf(RED"2. Remove Book\n"RESET);
@@ -63,16 +56,17 @@ int main() {
     printCenteredBold("|              Library Management System              |");
     printCenteredBold("|                                                     |");
     printCenteredBold("_______________________________________________________");
+
+    // Initialize mutex and semaphore
     // Initialize semaphore to allow multiple readers or a single writer
     sem_init(&rw_mutex, 0, 1);
 
     while (1) {
-        // Display the menu to the user
         displayMenu();
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
-        // Handle user input and perform corresponding actions
+       
         switch (choice) {
             case 1:
                 // Create writer thread to add a book
@@ -81,9 +75,12 @@ int main() {
                 break;
 
             case 2:
-                // Create writer thread to remove a book
+               /* // Create writer thread to remove a book
                 pthread_create(&writers[1], NULL, writer_thread, NULL);
                 pthread_join(writers[1], NULL);
+                break;
+                */
+               removeBook();
                 break;
 
             case 3:
@@ -95,30 +92,25 @@ int main() {
                     pthread_join(readers[i], NULL);
                 }
                 break;
-
             case 4:
-                // Add new member
                 addMember();
                 break;
 
             case 5:
-                // Remove member
                 removeMember();
                 break;
 
             case 6:
-                // View member list
                 viewMemberList();
                 break;
 
             case 7:
-                // Borrow a book
                 borrowBook();
                 break;
 
             case 8:
-                // Exit the program
                 printf("Exiting the system...\n");
+
                 sem_destroy(&rw_mutex);  // Destroy the semaphore
                 pthread_mutex_destroy(&mutex);  // Destroy the mutex
                 return 0;
