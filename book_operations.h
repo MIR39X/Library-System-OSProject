@@ -4,6 +4,9 @@
 // Function declarations for book operations
 void addBook();
 void removeBook();
+void borrowBook();
+void logEvent(const char *event);
+int checkIfBookExists(char *bookTitle);
 void viewBookCatalog();
 
 // Function declarations for member operations
